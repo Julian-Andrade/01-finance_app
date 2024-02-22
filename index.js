@@ -4,6 +4,7 @@ import express from 'express'
 import { PostgresHelper } from './src/db/postgres/helper.js'
 
 const app = express()
+const PORT = 3000
 
 app.get('/', async (req, res) => {
     const results = await PostgresHelper.query('SELECT * FROM users;')
@@ -11,4 +12,4 @@ app.get('/', async (req, res) => {
     res.send(JSON.stringify(results))
 })
 
-app.listen(3000, () => console.log('listening on port 3000'))
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
