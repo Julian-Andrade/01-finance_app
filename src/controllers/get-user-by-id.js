@@ -1,4 +1,5 @@
-import { badRequest, notFound, ok, serverError } from './helpers.js'
+import { notFound, ok, serverError } from './helpers/http.js'
+import { InvalidIdResponse } from './helpers/user.js'
 import { GetUserByIdUseCase } from '../use-cases/get-user-by-id.js'
 import validator from 'validator'
 
@@ -9,7 +10,7 @@ export class GetUserByIdController {
             const isIdValid = validator.isUUID(httpRequest.params.userId)
 
             if (!isIdValid) {
-                return badRequest({ message: 'The provid id is invalid.' })
+                return InvalidIdResponse()
             }
 
             // Buscar o use case
