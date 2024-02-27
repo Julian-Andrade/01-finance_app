@@ -27,7 +27,7 @@ export class CreateUserUseCase {
         // Criptografar a senha
         const hashedPassword = await bcrypt.hash(createUserParams.password, 10)
 
-        // Inserior o usuário no banco de dados
+        // Inserir o usuário no banco de dados
         const user = {
             ...createUserParams,
             id: userId,
