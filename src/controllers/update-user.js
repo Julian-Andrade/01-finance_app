@@ -1,16 +1,16 @@
 import { UpdateUserUseCase } from '../use-cases/index.js'
+import { EmailAlreadyInUseError } from '../errors/user.js'
 import {
     badRequest,
     serverError,
     ok,
-    InvalidPasswordResponse,
     EmailIsAlreadyInUseResponse,
     InvalidIdResponse,
+    InvalidPasswordResponse,
     checkIfPasswordIsValid,
     checkIfEmailIsValid,
     checkIfIdIsValid,
 } from './helpers/index.js'
-import { EmailAlreadyInUseError } from '../errors/user.js'
 
 export class UpdateUserController {
     async execute(httpRequest) {
@@ -23,7 +23,7 @@ export class UpdateUserController {
                 return InvalidIdResponse()
             }
 
-            const updateUserParams = httpRequest.body
+            const params = httpRequest.body
 
             const allowedFields = [
                 'first_name',
@@ -32,7 +32,7 @@ export class UpdateUserController {
                 'password',
             ]
 
-            const someFieldIsNotAllowed = Object.keys(updateUserParams).some(
+            const someFieldIsNotAllowed = Object.keys(params).some(
                 (field) => !allowedFields.includes(field),
             )
 
@@ -40,18 +40,16 @@ export class UpdateUserController {
                 return badRequest({ message: 'Some field is not allowed.' })
             }
 
-            if (updateUserParams.password) {
-                const passwordIsValid = checkIfPasswordIsValid(
-                    updateUserParams.password,
-                )
+            if (params.password) {
+                const passwordIsValid = checkIfPasswordIsValid(params.password)
 
                 if (!passwordIsValid) {
                     return InvalidPasswordResponse()
                 }
             }
 
-            if (updateUserParams.email) {
-                const emailIsValid = checkIfEmailIsValid(updateUserParams.email)
+            if (params.email) {
+                const emailIsValid = checkIfEmailIsValid(params.email)
 
                 if (!emailIsValid) {
                     return EmailIsAlreadyInUseResponse()
@@ -60,17 +58,15 @@ export class UpdateUserController {
 
             const updateUserUseCase = new UpdateUserUseCase()
 
-            const updatedUser = await updateUserUseCase.execute(
-                userId,
-                updateUserParams,
-            )
+            const updatedUser = await updateUserUseCase.execute(userId, params)
 
             return ok(updatedUser)
         } catch (error) {
             if (error instanceof EmailAlreadyInUseError) {
                 return badRequest({ message: error.message })
             }
-            return serverError(error)
+            console.error(error)
+            return serverError()
         }
     }
 }

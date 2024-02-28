@@ -2,19 +2,19 @@ import validator from 'validator'
 import { badRequest } from './http.js'
 
 export const InvalidPasswordResponse = () => {
-    badRequest({
+    return badRequest({
         message: 'Password must be at least 6 characters.',
     })
 }
 
 export const EmailIsAlreadyInUseResponse = () => {
-    badRequest({
+    return badRequest({
         message: 'Invalid email, please provide a valid one.',
     })
 }
 
 export const InvalidIdResponse = () => {
-    badRequest({
+    return badRequest({
         message: 'This provided ID is not valid.',
     })
 }
