@@ -1,9 +1,9 @@
 import {
-    notFound,
     ok,
     serverError,
     checkIfIdIsValid,
     InvalidIdResponse,
+    InvalidUserResponse,
 } from './helpers/index.js'
 import { GetUserByIdUseCase } from '../use-cases/index.js'
 
@@ -27,7 +27,7 @@ export class GetUserByIdController {
 
             // Verifica se existe o usuário no banco de dados
             if (!user) {
-                return notFound({ message: 'User not found.' })
+                return InvalidUserResponse()
             }
 
             return ok(user)
