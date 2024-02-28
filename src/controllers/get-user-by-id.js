@@ -2,8 +2,8 @@ import {
     notFound,
     ok,
     serverError,
-    InvalidIdResponse,
     checkIfIdIsValid,
+    InvalidIdResponse,
 } from './helpers/index.js'
 import { GetUserByIdUseCase } from '../use-cases/index.js'
 
