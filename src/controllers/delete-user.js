@@ -4,9 +4,11 @@ import {
     ok,
     serverError,
 } from './helpers/index.js'
-import { DeleteUserUseCase } from '../use-cases/index.js'
 
 export class DeleteUserController {
+    constructor(deleteUserUseCase) {
+        this.deleteUserUseCase = deleteUserUseCase
+    }
     async execute(httpRequest) {
         try {
             // Verificar se o id é UUID
@@ -18,11 +20,8 @@ export class DeleteUserController {
                 return InvalidIdResponse()
             }
 
-            // Buscar o use case
-            const deleteUserUseCase = new DeleteUserUseCase()
-
             // Deleta o usuário buscado
-            const deletedUser = await deleteUserUseCase.execute(userId)
+            const deletedUser = await this.deleteUserUseCase.execute(userId)
 
             if (!deletedUser) {
                 return InvalidUserResponse()
