@@ -5,9 +5,11 @@ import {
     InvalidIdResponse,
     InvalidUserResponse,
 } from './helpers/index.js'
-import { GetUserByIdUseCase } from '../use-cases/index.js'
 
 export class GetUserByIdController {
+    constructor(getUserByIdUseCase) {
+        this.getUserByIdUseCase = getUserByIdUseCase
+    }
     async execute(httpRequest) {
         try {
             // Verificar se o id é UUID
@@ -17,11 +19,8 @@ export class GetUserByIdController {
                 return InvalidIdResponse()
             }
 
-            // Buscar o use case
-            const getUserByIdUseCase = new GetUserByIdUseCase()
-
             // Retorna o usuário buscado
-            const user = await getUserByIdUseCase.execute(
+            const user = await this.getUserByIdUseCase.execute(
                 httpRequest.params.userId,
             )
 
