@@ -25,6 +25,18 @@ export const InvalidUserResponse = () => {
     })
 }
 
+export const InvalidAmountResponse = () => {
+    return badRequest({
+        message: 'The amount must be a valid currency.',
+    })
+}
+
+export const InvalidTypeResponse = () => {
+    return badRequest({
+        message: 'The type must be EARNING, EXPENSE or INVESTIMENT.',
+    })
+}
+
 export const checkIfPasswordIsValid = (password) => password.length >= 6
 
 export const checkIfEmailIsValid = (email) => validator.isEmail(email)
