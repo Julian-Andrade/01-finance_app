@@ -5,6 +5,7 @@ import {
     serverError,
     InvalidPasswordResponse,
     EmailIsAlreadyInUseResponse,
+    requiredFieldIsMissingResponse,
     checkIfPasswordIsValid,
     checkIfEmailIsValid,
     validateRequiredFields,
@@ -29,9 +30,7 @@ export class CreateUserController {
                 validateRequiredFields(params, requiredFields)
 
             if (!requireFieldsWereProvided) {
-                return badRequest({
-                    message: `Missing parameter ${missingField} is required.`,
-                })
+                return requiredFieldIsMissingResponse(missingField)
             }
 
             const passwordIsValid = checkIfPasswordIsValid(params.password)

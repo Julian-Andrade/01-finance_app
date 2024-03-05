@@ -9,6 +9,12 @@ export const InvalidUserResponse = () => {
     })
 }
 
+export const requiredFieldIsMissingResponse = (field) => {
+    return badRequest({
+        message: `Missing param: ${field}.`,
+    })
+}
+
 export const checkIfIsString = (value) => typeof value === 'string'
 
 export const validateRequiredFields = (params, requiredFields) => {
