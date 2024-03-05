@@ -19,26 +19,6 @@ export const InvalidIdResponse = () => {
     })
 }
 
-export const InvalidUserResponse = () => {
-    return badRequest({
-        message: 'User is not found.',
-    })
-}
-
-export const InvalidAmountResponse = () => {
-    return badRequest({
-        message: 'The amount must be a valid currency.',
-    })
-}
-
-export const InvalidTypeResponse = () => {
-    return badRequest({
-        message: 'The type must be EARNING, EXPENSE or INVESTIMENT.',
-    })
-}
-
 export const checkIfPasswordIsValid = (password) => password.length >= 6
 
 export const checkIfEmailIsValid = (email) => validator.isEmail(email)
-
-export const checkIfIdIsValid = (id) => validator.isUUID(id)
