@@ -2,6 +2,10 @@ import validator from 'validator'
 import { badRequest } from './http.js'
 
 export const checkIfAmountIsValid = (amount) => {
+    if (typeof amount !== 'number') {
+        return false
+    }
+
     return validator.isCurrency(amount.toString(), {
         digits_after_decimal: [2],
         allow_negatives: false,
