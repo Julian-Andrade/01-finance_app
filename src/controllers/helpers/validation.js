@@ -3,9 +3,9 @@ import { badRequest } from './http.js'
 
 export const checkIfIdIsValid = (id) => validator.isUUID(id)
 
-export const InvalidUserResponse = () => {
+export const InvalidIdResponse = () => {
     return badRequest({
-        message: 'User is not found.',
+        message: 'This provided ID is not valid.',
     })
 }
 
