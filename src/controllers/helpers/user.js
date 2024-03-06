@@ -13,8 +13,11 @@ export const EmailIsAlreadyInUseResponse = () => {
     })
 }
 
-export const InvalidUserResponse = () =>
-    notFound({ message: 'User not found.' })
+export const InvalidUserResponse = () => {
+    return badRequest({
+        message: 'User is not found.',
+    })
+}
 
 export const checkIfPasswordIsValid = (password) => password.length >= 6
 
