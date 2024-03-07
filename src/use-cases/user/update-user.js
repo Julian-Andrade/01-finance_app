@@ -5,28 +5,23 @@ export class UpdateUserUseCase {
         this.getUserByEmailRepository = getUserByEmailRepository
         this.updateUserRepository = updateUserRepository
     }
-    async execute(userId, updateUserParams) {
+    async execute(userId, params) {
         // Se o e-mail estiver sendo atualizado, verificar se está em uso
-        if (updateUserParams.email) {
+        if (params.email) {
             const userWithProvidedEmail =
-                await this.getUserByEmailRepository.execute(
-                    updateUserParams.email,
-                )
+                await this.getUserByEmailRepository.execute(params.email)
 
             if (userWithProvidedEmail && userWithProvidedEmail.id !== userId) {
-                throw new EmailAlreadyInUseError(updateUserParams.email)
+                throw new EmailAlreadyInUseError(params.email)
             }
         }
 
         const user = {
-            ...updateUserParams,
+            ...params,
         }
         // Se a senha estiver sendo atualizada, criptografá-la
-        if (updateUserParams.password) {
-            const hashedPassword = await bcrypt.hash(
-                updateUserParams.password,
-                10,
-            )
+        if (params.password) {
+            const hashedPassword = await bcrypt.hash(params.password, 10)
 
             user.password = hashedPassword
         }
