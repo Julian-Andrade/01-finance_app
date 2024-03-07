@@ -1,5 +1,5 @@
 export class UpdateTransactionUseCase {
-    constructor(getUserByIdRepository, updateTransactionRepository) {
+    constructor(updateTransactionRepository) {
         this.updateTransactionRepository = updateTransactionRepository
     }
 

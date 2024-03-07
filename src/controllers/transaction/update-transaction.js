@@ -1,12 +1,15 @@
 import {
-    InvalidIdResponse,
-    InvalidAmountResponse,
-    InvalidTypeResponse,
     checkIfIdIsValid,
-    checkIfAmountIsValid,
-    checkIfTypeIsValid,
-    serverError,
+    invalidIdResponse,
     badRequest,
+    checkIfAmountIsValid,
+    invalidAmountResponse,
+    checkIfTypeIsValid,
+    invalidTypeResponse,
+    ok,
+    serverError,
+    checkIfDateIsValid,
+    invalidDateResponse,
 } from '../helpers/index.js'
 
 export class UpdateTransactionController {
@@ -21,7 +24,7 @@ export class UpdateTransactionController {
             const idIsValid = checkIfIdIsValid(transactionId)
 
             if (!idIsValid) {
-                return InvalidIdResponse()
+                return invalidIdResponse()
             }
 
             const params = httpRequest.body
@@ -40,7 +43,15 @@ export class UpdateTransactionController {
                 const amountIsValid = checkIfAmountIsValid(params.amount)
 
                 if (!amountIsValid) {
-                    return InvalidAmountResponse()
+                    return invalidAmountResponse()
+                }
+            }
+
+            if (params.date) {
+                const dateIsValid = checkIfDateIsValid(params.date)
+
+                if (!dateIsValid) {
+                    return invalidDateResponse()
                 }
             }
 
@@ -48,11 +59,11 @@ export class UpdateTransactionController {
                 const typeIsValid = checkIfTypeIsValid(params.type)
 
                 if (!typeIsValid) {
-                    return InvalidTypeResponse()
+                    return invalidTypeResponse()
                 }
             }
 
-            const transaction = await updateTransactionUseCase.execute(
+            const transaction = await this.updateTransactionUseCase.execute(
                 transactionId,
                 params,
             )
@@ -60,7 +71,8 @@ export class UpdateTransactionController {
             return ok(transaction)
         } catch (error) {
             console.error(error)
-            return serverError
+
+            return serverError()
         }
     }
 }

@@ -9,6 +9,7 @@ import {
 import {
     makeCreateTransactionController,
     makeGetTransactionsByUserIdController,
+    makeUpdateTransactionController,
 } from './src/factories/controllers/transaction.js'
 
 const app = express()
@@ -51,6 +52,16 @@ app.delete('/api/users/:userId', async (request, response) => {
 
 // Transaction Routes
 
+app.get('/api/transactions', async (request, response) => {
+    const getTransactionsByUserIdController =
+        makeGetTransactionsByUserIdController()
+
+    const { statusCode, body } =
+        await getTransactionsByUserIdController.execute(request)
+
+    response.status(statusCode).send(body)
+})
+
 app.post('/api/transactions', async (request, response) => {
     const createTransactionController = makeCreateTransactionController()
 
@@ -60,12 +71,11 @@ app.post('/api/transactions', async (request, response) => {
     response.status(statusCode).send(body)
 })
 
-app.get('/api/transactions', async (request, response) => {
-    const getTransactionsByUserIdController =
-        makeGetTransactionsByUserIdController()
+app.patch('/api/transactions/:transactionId', async (request, response) => {
+    const updateTransactionController = makeUpdateTransactionController()
 
     const { statusCode, body } =
-        await getTransactionsByUserIdController.execute(request)
+        await updateTransactionController.execute(request)
 
     response.status(statusCode).send(body)
 })
