@@ -1,8 +1,8 @@
 import { UserNotFoundError } from '../../errors/user.js'
 import {
     serverError,
-    InvalidUserResponse,
-    InvalidIdResponse,
+    invalidUserResponse,
+    invalidIdResponse,
     requiredFieldIsMissingResponse,
     checkIfIdIsValid,
     ok,
@@ -24,7 +24,7 @@ export class GetTransactionsByUserIdController {
             const userIdIsValid = checkIfIdIsValid(userId)
 
             if (!userIdIsValid) {
-                return InvalidIdResponse()
+                return invalidIdResponse()
             }
 
             // Chamar o UseCase
@@ -38,7 +38,7 @@ export class GetTransactionsByUserIdController {
             console.error(error)
 
             if (error instanceof UserNotFoundError) {
-                return InvalidUserResponse()
+                return invalidUserResponse()
             }
 
             return serverError()

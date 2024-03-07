@@ -1,7 +1,7 @@
 import validator from 'validator'
 import { badRequest } from './http.js'
 
-export const InvalidPasswordResponse = () => {
+export const invalidPasswordResponse = () => {
     return badRequest({
         message: 'Password must be at least 6 characters.',
     })
@@ -13,7 +13,7 @@ export const EmailIsAlreadyInUseResponse = () => {
     })
 }
 
-export const InvalidUserResponse = () => {
+export const invalidUserResponse = () => {
     return badRequest({
         message: 'User is not found.',
     })

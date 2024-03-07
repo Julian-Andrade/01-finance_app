@@ -3,7 +3,7 @@ import {
     badRequest,
     created,
     serverError,
-    InvalidPasswordResponse,
+    invalidPasswordResponse,
     EmailIsAlreadyInUseResponse,
     requiredFieldIsMissingResponse,
     checkIfPasswordIsValid,
@@ -36,7 +36,7 @@ export class CreateUserController {
             const passwordIsValid = checkIfPasswordIsValid(params.password)
 
             if (!passwordIsValid) {
-                return InvalidPasswordResponse()
+                return invalidPasswordResponse()
             }
 
             const emailIsValid = checkIfEmailIsValid(params.email)

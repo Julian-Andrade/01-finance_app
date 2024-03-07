@@ -1,7 +1,7 @@
 import {
-    InvalidIdResponse,
-    InvalidAmountResponse,
-    InvalidTypeResponse,
+    invalidIdResponse,
+    invalidAmountResponse,
+    invalidTypeResponse,
     requiredFieldIsMissingResponse,
     checkIfIdIsValid,
     checkIfAmountIsValid,
@@ -31,13 +31,13 @@ export class CreateTransactionController {
             const userIdIsValid = checkIfIdIsValid(params.user_id)
 
             if (!userIdIsValid) {
-                return InvalidIdResponse()
+                return invalidIdResponse()
             }
 
             const amountIsValid = checkIfAmountIsValid(params.amount)
 
             if (!amountIsValid) {
-                return InvalidAmountResponse()
+                return invalidAmountResponse()
             }
 
             const type = params.type.trim().toUpperCase()
@@ -45,7 +45,7 @@ export class CreateTransactionController {
             const requiredTypes = checkIfTypeIsValid(type)
 
             if (!requiredTypes) {
-                return InvalidTypeResponse()
+                return invalidTypeResponse()
             }
 
             const transaction = await this.createTransactionUseCase.execute({

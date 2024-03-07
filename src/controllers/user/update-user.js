@@ -4,8 +4,8 @@ import {
     serverError,
     ok,
     EmailIsAlreadyInUseResponse,
-    InvalidIdResponse,
-    InvalidPasswordResponse,
+    invalidIdResponse,
+    invalidPasswordResponse,
     checkIfPasswordIsValid,
     checkIfEmailIsValid,
     checkIfIdIsValid,
@@ -22,7 +22,7 @@ export class UpdateUserController {
             const isIdValid = checkIfIdIsValid(userId)
 
             if (!isIdValid) {
-                return InvalidIdResponse()
+                return invalidIdResponse()
             }
 
             const params = httpRequest.body
@@ -46,7 +46,7 @@ export class UpdateUserController {
                 const passwordIsValid = checkIfPasswordIsValid(params.password)
 
                 if (!passwordIsValid) {
-                    return InvalidPasswordResponse()
+                    return invalidPasswordResponse()
                 }
             }
 

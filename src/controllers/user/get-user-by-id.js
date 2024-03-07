@@ -2,8 +2,8 @@ import {
     ok,
     serverError,
     checkIfIdIsValid,
-    InvalidIdResponse,
-    InvalidUserResponse,
+    invalidIdResponse,
+    invalidUserResponse,
 } from '../helpers/index.js'
 
 export class GetUserByIdController {
@@ -16,7 +16,7 @@ export class GetUserByIdController {
             const isIdValid = checkIfIdIsValid(httpRequest.params.userId)
 
             if (!isIdValid) {
-                return InvalidIdResponse()
+                return invalidIdResponse()
             }
 
             // Retorna o usuário buscado
@@ -26,7 +26,7 @@ export class GetUserByIdController {
 
             // Verifica se existe o usuário no banco de dados
             if (!user) {
-                return InvalidUserResponse()
+                return invalidUserResponse()
             }
 
             return ok(user)
