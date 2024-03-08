@@ -12,7 +12,7 @@ export class DeleteTransactionController {
     }
     async execute(httpRequest) {
         try {
-            // Verificar se o id é UUID
+            // Verificar se o id é válido
             const transactionId = httpRequest.params.transactionId
 
             const isIdValid = checkIfIdIsValid(transactionId)
@@ -21,7 +21,7 @@ export class DeleteTransactionController {
                 return invalidIdResponse()
             }
 
-            // Deleta o usuário buscado
+            // Deleta a transação buscada
             const deletedTransaction =
                 await this.deleteTransactionUseCase.execute(transactionId)
 
