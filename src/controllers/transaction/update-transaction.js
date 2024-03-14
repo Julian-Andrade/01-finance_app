@@ -5,6 +5,7 @@ import {
     ok,
     serverError,
 } from '../helpers/index.js'
+import { ZodError } from 'zod'
 
 export class UpdateTransactionController {
     constructor(updateTransactionUseCase) {
@@ -32,6 +33,12 @@ export class UpdateTransactionController {
 
             return ok(transaction)
         } catch (error) {
+            if (error instanceof ZodError) {
+                return badRequest({
+                    message: error.errors[0].message,
+                })
+            }
+
             console.error(error)
 
             return serverError()
