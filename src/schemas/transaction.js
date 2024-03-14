@@ -15,7 +15,13 @@ export const createTransactionSchema = z.object({
         .min(1, {
             message: 'Please provide a valid name.',
         }),
-    date: z.coerce.date(),
+    date: z
+        .string({
+            required_error: 'Date is required.',
+        })
+        .datetime({
+            message: 'Date must be a valid Date.',
+        }),
     amount: z
         .number({
             invalid_type_error: 'Amount is not a number.',
