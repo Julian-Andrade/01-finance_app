@@ -27,23 +27,23 @@ export class PostgresGetUserBalanceRepository {
         })
 
         const {
-            _sum: { amount: totalInvestiments },
+            _sum: { amount: totalInvestments },
         } = await prisma.transaction.aggregate({
             where: {
                 user_id: userId,
-                type: 'INVESTIMENT',
+                type: 'INVESTMENT',
             },
             _sum: {
                 amount: true,
             },
         })
 
-        const balance = totalEarnings - (totalExpenses + totalInvestiments)
+        const balance = totalEarnings - (totalExpenses + totalInvestments)
 
         return {
             earnings: totalEarnings,
             expenses: totalExpenses,
-            investiments: totalInvestiments,
+            investments: totalInvestments,
             balance,
         }
     }
