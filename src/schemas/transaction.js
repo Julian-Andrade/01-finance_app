@@ -36,9 +36,9 @@ export const createTransactionSchema = z.object({
                 decimal_separator: '.',
             }),
         ),
-    type: z.enum(['EARNING', 'EXPENSE', 'INVESTIMENT'], {
+    type: z.enum(['EARNING', 'EXPENSE', 'INVESTMENT'], {
         errorMap: () => ({
-            message: 'Type must be EXPENSE, EARNING or INVESTIMENT.',
+            message: 'Type must be EXPENSE, EARNING or INVESTMENT.',
         }),
     }),
 })
