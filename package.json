@@ -6,6 +6,7 @@
     "type": "module",
     "scripts": {
         "test": "jest",
+        "test:watch": "jest --watch --passWithNoTests",
         "postinstall": "npx husky install && npx prisma generate",
         "prepare": "husky",
         "start:dev": "node --watch index.js"
