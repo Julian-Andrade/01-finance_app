@@ -1,7 +1,7 @@
-import { badRequest } from './http.js'
+import { notFound } from './http.js'
 
 export const invalidUserResponse = () => {
-    return badRequest({
+    return notFound({
         message: 'User is not found.',
     })
 }
