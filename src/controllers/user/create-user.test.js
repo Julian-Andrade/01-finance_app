@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker'
 import { CreateUserController } from '../index.js'
 import { EmailAlreadyInUseError } from '../../errors/user.js'
 
-describe('Create User Controller', () => {
+describe('CreateUserController', () => {
     class CreateUserUseCaseStub {
         execute(user) {
             return user
