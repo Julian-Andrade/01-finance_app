@@ -52,6 +52,19 @@ describe('CreateTransactionController', () => {
         expect(result.statusCode).toBe(201)
     })
 
+    it('should return 400 when not provided an user_id', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            body: { ...createTransactionParams.body, user_id: undefined },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
+
     it('should return 201 when creating a transaction successfully (investment)', async () => {
         // Arrange
         const { sut } = makeSut()
@@ -66,19 +79,6 @@ describe('CreateTransactionController', () => {
 
         // Assert
         expect(result.statusCode).toBe(201)
-    })
-
-    it('should return 400 when not provided an user_id', async () => {
-        // Arrange
-        const { sut } = makeSut()
-
-        // Action
-        const result = await sut.execute({
-            body: { ...createTransactionParams.body, user_id: undefined },
-        })
-
-        // Assert
-        expect(result.statusCode).toBe(400)
     })
 
     it('should return 400 when not provided a name', async () => {
