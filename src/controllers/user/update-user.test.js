@@ -50,7 +50,7 @@ describe('UpdateUserController', () => {
         expect(result.statusCode).toBe(400)
     })
 
-    it('should return 400 when a provided email is invalid', async () => {
+    it('should return 400 when a provided password is invalid', async () => {
         // Arrange
         const { sut } = makeSut()
 
@@ -59,7 +59,9 @@ describe('UpdateUserController', () => {
             params: httpRequest.params,
             body: {
                 ...httpRequest.body,
-                email: 'invalid_email',
+                password: faker.internet.password({
+                    length: 5,
+                }),
             },
         })
 
