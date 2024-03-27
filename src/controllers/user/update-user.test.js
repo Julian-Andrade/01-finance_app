@@ -33,9 +33,37 @@ describe('UpdateUserController', () => {
         const { sut } = makeSut()
 
         // Action
-        const response = await sut.execute(httpRequest)
+        const result = await sut.execute(httpRequest)
 
         // Assert
-        expect(response.statusCode).toBe(200)
+        expect(result.statusCode).toBe(200)
+    })
+
+    it('should return 400 if user id is invalid', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({ params: { userId: 'invalid_id' } })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 when a provided email is invalid', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            params: httpRequest.params,
+            body: {
+                ...httpRequest.body,
+                email: 'invalid_email',
+            },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
     })
 })
