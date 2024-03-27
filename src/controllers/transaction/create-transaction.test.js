@@ -35,4 +35,69 @@ describe('CreateTransactionController', () => {
         // Assert
         expect(result.statusCode).toBe(201)
     })
+
+    it('should return 400 when not provided an user_id', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            body: { ...createTransactionParams.body, user_id: undefined },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 when not provided a name', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            body: { ...createTransactionParams.body, name: undefined },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 when not provided a date', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            body: { ...createTransactionParams.body, date: undefined },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 when not provided an amount', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            body: { ...createTransactionParams.body, amount: undefined },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 when not provided a type', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            body: { ...createTransactionParams.body, type: undefined },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
 })
