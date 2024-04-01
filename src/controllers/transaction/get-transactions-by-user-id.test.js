@@ -8,12 +8,10 @@ describe('GetTransactionsByUserIdController', () => {
             return {
                 id: faker.string.uuid(),
                 user_id: faker.string.uuid(),
-                first_name: faker.person.firstName(),
-                last_name: faker.person.lastName(),
-                email: faker.internet.email(),
-                password: faker.internet.password({
-                    length: 7,
-                }),
+                name: faker.commerce.productName(),
+                date: faker.date.anytime().toISOString(),
+                amount: Number(faker.finance.amount()),
+                type: 'EXPENSE',
             }
         }
     }
