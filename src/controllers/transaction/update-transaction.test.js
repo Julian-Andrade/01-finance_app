@@ -49,4 +49,38 @@ describe('UpdateTransactionController', () => {
         // Assert
         expect(result.statusCode).toBe(400)
     })
+
+    it('should return 400 when a provided a unallowed field', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            ...httpRequest,
+            body: {
+                ...httpRequest.body,
+                unallowed_field: 'unallowed_value',
+            },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
+
+    it('should return 400 when a provided a invalid amount', async () => {
+        // Arrange
+        const { sut } = makeSut()
+
+        // Action
+        const result = await sut.execute({
+            ...httpRequest,
+            body: {
+                ...httpRequest.body,
+                amount: 'invalid_amount',
+            },
+        })
+
+        // Assert
+        expect(result.statusCode).toBe(400)
+    })
 })
