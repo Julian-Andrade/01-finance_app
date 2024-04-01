@@ -1,5 +1,6 @@
 import { updateTransactionSchema } from '../../schemas/transaction.js'
 import {
+    badRequest,
     checkIfIdIsValid,
     invalidIdResponse,
     ok,
