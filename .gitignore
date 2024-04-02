@@ -6,3 +6,6 @@ node_modules
 
 # Postgres Volumes
 .postgres-data
+
+# Jest
+coverage
