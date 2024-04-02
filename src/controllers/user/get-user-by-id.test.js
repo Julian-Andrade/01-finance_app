@@ -76,4 +76,16 @@ describe('GetUserByIdController', () => {
         // Assert
         expect(result.statusCode).toBe(500)
     })
+
+    it('should call GetUserByIdUseCase with correct params ', async () => {
+        // Arrange
+        const { sut, getUserByIdUseCase } = makeSut()
+        const executeSpy = jest.spyOn(getUserByIdUseCase, 'execute')
+
+        // Action
+        await sut.execute(httpRequest)
+
+        // Assert
+        expect(executeSpy).toHaveBeenCalledWith(httpRequest.params.userId)
+    })
 })
