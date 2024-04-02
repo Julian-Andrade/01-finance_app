@@ -137,19 +137,6 @@ describe('CreateUserController', () => {
         expect(result.statusCode).toBe(400)
     })
 
-    it('should call CreateUserUseCase with correct params', async () => {
-        // Arrange
-        const { sut, createUserUseCase } = makeSut()
-        const executeSpy = jest.spyOn(createUserUseCase, 'execute')
-
-        // Action
-        await sut.execute(httpRequest)
-
-        // Assert
-        expect(executeSpy).toHaveBeenCalledWith(httpRequest.body)
-        expect(executeSpy).toHaveBeenCalledTimes(1)
-    })
-
     it('should return 400 if CreateUserUseCase throws EmailIsAlreadyInUseError', async () => {
         // Arrange
         const { sut, createUserUseCase } = makeSut()
@@ -174,5 +161,18 @@ describe('CreateUserController', () => {
 
         // Assert
         expect(result.statusCode).toBe(500)
+    })
+
+    it('should call CreateUserUseCase with correct params', async () => {
+        // Arrange
+        const { sut, createUserUseCase } = makeSut()
+        const executeSpy = jest.spyOn(createUserUseCase, 'execute')
+
+        // Action
+        await sut.execute(httpRequest)
+
+        // Assert
+        expect(executeSpy).toHaveBeenCalledWith(httpRequest.body)
+        expect(executeSpy).toHaveBeenCalledTimes(1)
     })
 })

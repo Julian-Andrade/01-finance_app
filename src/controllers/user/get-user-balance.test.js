@@ -62,16 +62,10 @@ describe('GetUserBalanceController', () => {
         const { sut, getUserBalanceUseCase } = makeSut()
         const executeSpy = jest.spyOn(getUserBalanceUseCase, 'execute')
 
-        const userId = faker.string.uuid()
-
         // Action
-        await sut.execute({
-            params: {
-                userId,
-            },
-        })
+        await sut.execute(httpRequest)
 
         // Assert
-        expect(executeSpy).toHaveBeenCalledWith(userId)
+        expect(executeSpy).toHaveBeenCalledWith(httpRequest.params.userId)
     })
 })
